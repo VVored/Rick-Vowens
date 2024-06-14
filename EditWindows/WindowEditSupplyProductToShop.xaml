@@ -1,0 +1,22 @@
+﻿<Window x:Class="RickVowens.EditWindows.WindowEditSupplyProductToShop"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RickVowens.EditWindows"
+        mc:Ignorable="d"
+        Title="Редактирование отгрузки в магазин" Icon="D:\3 курс\RickVowens\imgs\icon.png" MinHeight="270" MinWidth="480" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Margin="0, 10">Дата отправления:</TextBlock>
+            <DatePicker Margin="0" SelectedDate="{Binding Date}" Padding="0"></DatePicker>
+            <TextBlock Margin="0, 10">Адрес магазина:</TextBlock>
+            <ComboBox Name="cbShopAdress" SelectedValuePath="IDShop" SelectedValue="{Binding IDShop}" DisplayMemberPath="Adress"></ComboBox>
+            <Button Width="120" Height="35" Margin="0, 10" Click="btSave" Background="Black" Foreground="White">
+                <Button.Content>
+                    <TextBlock FontFamily="../Fonts/#Ledger" FontSize="15">Подтвердить</TextBlock>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

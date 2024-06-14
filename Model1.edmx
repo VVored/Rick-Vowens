@@ -1,0 +1,1075 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ShoesKursovoiModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departaments">
+          <Key>
+            <PropertyRef Name="IDDepartment" />
+          </Key>
+          <Property Name="IDDepartment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="IDEmpoyee" />
+          </Key>
+          <Property Name="IDEmpoyee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDDepartment" Type="int" Nullable="false" />
+          <Property Name="Post" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="IdGender" />
+          </Key>
+          <Property Name="IdGender" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="IDMaterial" />
+          </Key>
+          <Property Name="IDMaterial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountInStock" Type="int" Nullable="false" />
+          <Property Name="CostWithoutNDS" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialOfProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Articul" Type="int" Nullable="false" />
+          <Property Name="IDMaterial" Type="int" Nullable="false" />
+          <Property Name="CountOfMaterial" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Articul" />
+          </Key>
+          <Property Name="Articul" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDType" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountInStock" Type="int" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdGender" Type="int" Nullable="false" />
+          <Property Name="Age" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="CostWithoutNDS" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="IDProduction" />
+          </Key>
+          <Property Name="IDDepartment" Type="int" Nullable="false" />
+          <Property Name="DateProduction" Type="datetime" Nullable="false" />
+          <Property Name="CountOfWorkers" Type="int" Nullable="false" />
+          <Property Name="IDProduction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SendStatus" Type="nvarchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductionContain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Articul" Type="int" Nullable="false" />
+          <Property Name="CountOfProduct" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDProduction" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shops">
+          <Key>
+            <PropertyRef Name="IDShop" />
+          </Key>
+          <Property Name="IDShop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuppliesMaterialsInMaterialStock">
+          <Key>
+            <PropertyRef Name="IDSupply" />
+          </Key>
+          <Property Name="IDSupply" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuppliesMaterialsInMaterialStockContains">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDSupply" Type="int" Nullable="false" />
+          <Property Name="IDMaterial" Type="int" Nullable="false" />
+          <Property Name="CountOfMaterial" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuppliesProductsInProductStock">
+          <Key>
+            <PropertyRef Name="IDSupply" />
+          </Key>
+          <Property Name="IDSupply" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuppliesProductsInProductStockContains">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDSupply" Type="int" Nullable="false" />
+          <Property Name="ShoeArticul" Type="int" Nullable="false" />
+          <Property Name="CountOfShoe" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuppliesProductsInShops">
+          <Key>
+            <PropertyRef Name="IDSupply" />
+          </Key>
+          <Property Name="IDSupply" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="IDShop" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuppliesProductsInShopsContains">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDSupply" Type="int" Nullable="false" />
+          <Property Name="ShoeArticul" Type="int" Nullable="false" />
+          <Property Name="CountOfShoe" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeOfProduct">
+          <Key>
+            <PropertyRef Name="IDType" />
+          </Key>
+          <Property Name="IDType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Employees_Departaments">
+          <End Role="Departaments" Type="Self.Departaments" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departaments">
+              <PropertyRef Name="IDDepartment" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="IDDepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialOfProduct_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="MaterialOfProduct" Type="Self.MaterialOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="IDMaterial" />
+            </Principal>
+            <Dependent Role="MaterialOfProduct">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialOfProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="MaterialOfProduct" Type="Self.MaterialOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Articul" />
+            </Principal>
+            <Dependent Role="MaterialOfProduct">
+              <PropertyRef Name="Articul" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="IdGender" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IdGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_TypeOfProduct1">
+          <End Role="TypeOfProduct" Type="Self.TypeOfProduct" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfProduct">
+              <PropertyRef Name="IDType" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_Departaments">
+          <End Role="Departaments" Type="Self.Departaments" Multiplicity="1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departaments">
+              <PropertyRef Name="IDDepartment" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="IDDepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductionContain_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductionContain" Type="Self.ProductionContain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Articul" />
+            </Principal>
+            <Dependent Role="ProductionContain">
+              <PropertyRef Name="Articul" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductionContain_Production">
+          <End Role="Production" Type="Self.Production" Multiplicity="1" />
+          <End Role="ProductionContain" Type="Self.ProductionContain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Production">
+              <PropertyRef Name="IDProduction" />
+            </Principal>
+            <Dependent Role="ProductionContain">
+              <PropertyRef Name="IDProduction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesMaterialsInMaterialStockContains_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesMaterialsInMaterialStockContains" Type="Self.SuppliesMaterialsInMaterialStockContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="IDMaterial" />
+            </Principal>
+            <Dependent Role="SuppliesMaterialsInMaterialStockContains">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesMaterialsInMaterialStockContains_SuppliesMaterialsInMaterialStock">
+          <End Role="SuppliesMaterialsInMaterialStock" Type="Self.SuppliesMaterialsInMaterialStock" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesMaterialsInMaterialStockContains" Type="Self.SuppliesMaterialsInMaterialStockContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuppliesMaterialsInMaterialStock">
+              <PropertyRef Name="IDSupply" />
+            </Principal>
+            <Dependent Role="SuppliesMaterialsInMaterialStockContains">
+              <PropertyRef Name="IDSupply" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesProductsInProductStockContains_Product1">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesProductsInProductStockContains" Type="Self.SuppliesProductsInProductStockContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Articul" />
+            </Principal>
+            <Dependent Role="SuppliesProductsInProductStockContains">
+              <PropertyRef Name="ShoeArticul" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesProductsInProductStockContains_SuppliesProductsInProductStock">
+          <End Role="SuppliesProductsInProductStock" Type="Self.SuppliesProductsInProductStock" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesProductsInProductStockContains" Type="Self.SuppliesProductsInProductStockContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuppliesProductsInProductStock">
+              <PropertyRef Name="IDSupply" />
+            </Principal>
+            <Dependent Role="SuppliesProductsInProductStockContains">
+              <PropertyRef Name="IDSupply" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesProductsInShops_Shops">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="1" />
+          <End Role="SuppliesProductsInShops" Type="Self.SuppliesProductsInShops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="IDShop" />
+            </Principal>
+            <Dependent Role="SuppliesProductsInShops">
+              <PropertyRef Name="IDShop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesProductsInShopsContains_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesProductsInShopsContains" Type="Self.SuppliesProductsInShopsContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Articul" />
+            </Principal>
+            <Dependent Role="SuppliesProductsInShopsContains">
+              <PropertyRef Name="ShoeArticul" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesProductsInShopsContains_SuppliesProductsInShops">
+          <End Role="SuppliesProductsInShops" Type="Self.SuppliesProductsInShops" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesProductsInShopsContains" Type="Self.SuppliesProductsInShopsContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuppliesProductsInShops">
+              <PropertyRef Name="IDSupply" />
+            </Principal>
+            <Dependent Role="SuppliesProductsInShopsContains">
+              <PropertyRef Name="IDSupply" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ShoesKursovoiModelContainer">
+          <EntitySet Name="Departaments" EntityType="Self.Departaments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialOfProduct" EntityType="Self.MaterialOfProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Production" EntityType="Self.Production" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductionContain" EntityType="Self.ProductionContain" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shops" EntityType="Self.Shops" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuppliesMaterialsInMaterialStock" EntityType="Self.SuppliesMaterialsInMaterialStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuppliesMaterialsInMaterialStockContains" EntityType="Self.SuppliesMaterialsInMaterialStockContains" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuppliesProductsInProductStock" EntityType="Self.SuppliesProductsInProductStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuppliesProductsInProductStockContains" EntityType="Self.SuppliesProductsInProductStockContains" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuppliesProductsInShops" EntityType="Self.SuppliesProductsInShops" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuppliesProductsInShopsContains" EntityType="Self.SuppliesProductsInShopsContains" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfProduct" EntityType="Self.TypeOfProduct" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employees_Departaments" Association="Self.FK_Employees_Departaments">
+            <End Role="Departaments" EntitySet="Departaments" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialOfProduct_Material" Association="Self.FK_MaterialOfProduct_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="MaterialOfProduct" EntitySet="MaterialOfProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialOfProduct_Product" Association="Self.FK_MaterialOfProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="MaterialOfProduct" EntitySet="MaterialOfProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Gender" Association="Self.FK_Product_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_TypeOfProduct1" Association="Self.FK_Product_TypeOfProduct1">
+            <End Role="TypeOfProduct" EntitySet="TypeOfProduct" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_Departaments" Association="Self.FK_Production_Departaments">
+            <End Role="Departaments" EntitySet="Departaments" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductionContain_Product" Association="Self.FK_ProductionContain_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductionContain" EntitySet="ProductionContain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductionContain_Production" Association="Self.FK_ProductionContain_Production">
+            <End Role="Production" EntitySet="Production" />
+            <End Role="ProductionContain" EntitySet="ProductionContain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesMaterialsInMaterialStockContains_Material" Association="Self.FK_SuppliesMaterialsInMaterialStockContains_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="SuppliesMaterialsInMaterialStockContains" EntitySet="SuppliesMaterialsInMaterialStockContains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesMaterialsInMaterialStockContains_SuppliesMaterialsInMaterialStock" Association="Self.FK_SuppliesMaterialsInMaterialStockContains_SuppliesMaterialsInMaterialStock">
+            <End Role="SuppliesMaterialsInMaterialStock" EntitySet="SuppliesMaterialsInMaterialStock" />
+            <End Role="SuppliesMaterialsInMaterialStockContains" EntitySet="SuppliesMaterialsInMaterialStockContains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesProductsInProductStockContains_Product1" Association="Self.FK_SuppliesProductsInProductStockContains_Product1">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="SuppliesProductsInProductStockContains" EntitySet="SuppliesProductsInProductStockContains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesProductsInProductStockContains_SuppliesProductsInProductStock" Association="Self.FK_SuppliesProductsInProductStockContains_SuppliesProductsInProductStock">
+            <End Role="SuppliesProductsInProductStock" EntitySet="SuppliesProductsInProductStock" />
+            <End Role="SuppliesProductsInProductStockContains" EntitySet="SuppliesProductsInProductStockContains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesProductsInShops_Shops" Association="Self.FK_SuppliesProductsInShops_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="SuppliesProductsInShops" EntitySet="SuppliesProductsInShops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesProductsInShopsContains_Product" Association="Self.FK_SuppliesProductsInShopsContains_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="SuppliesProductsInShopsContains" EntitySet="SuppliesProductsInShopsContains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesProductsInShopsContains_SuppliesProductsInShops" Association="Self.FK_SuppliesProductsInShopsContains_SuppliesProductsInShops">
+            <End Role="SuppliesProductsInShops" EntitySet="SuppliesProductsInShops" />
+            <End Role="SuppliesProductsInShopsContains" EntitySet="SuppliesProductsInShopsContains" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShoesKursovoiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Departaments">
+          <Key>
+            <PropertyRef Name="IDDepartment" />
+          </Key>
+          <Property Name="IDDepartment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Departaments" FromRole="Departaments" ToRole="Employees" />
+          <NavigationProperty Name="Production" Relationship="Self.FK_Production_Departaments" FromRole="Departaments" ToRole="Production" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="IDEmpoyee" />
+          </Key>
+          <Property Name="IDEmpoyee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDDepartment" Type="Int32" Nullable="false" />
+          <Property Name="Post" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Departaments" Relationship="Self.FK_Employees_Departaments" FromRole="Employees" ToRole="Departaments" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="IdGender" />
+          </Key>
+          <Property Name="IdGender" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Gender" FromRole="Gender" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="IDMaterial" />
+          </Key>
+          <Property Name="IDMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountInStock" Type="Int32" Nullable="false" />
+          <Property Name="CostWithoutNDS" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="MaterialOfProduct" Relationship="Self.FK_MaterialOfProduct_Material" FromRole="Material" ToRole="MaterialOfProduct" />
+          <NavigationProperty Name="SuppliesMaterialsInMaterialStockContains" Relationship="Self.FK_SuppliesMaterialsInMaterialStockContains_Material" FromRole="Material" ToRole="SuppliesMaterialsInMaterialStockContains" />
+        </EntityType>
+        <EntityType Name="MaterialOfProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Articul" Type="Int32" Nullable="false" />
+          <Property Name="IDMaterial" Type="Int32" Nullable="false" />
+          <Property Name="CountOfMaterial" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_MaterialOfProduct_Material" FromRole="MaterialOfProduct" ToRole="Material" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_MaterialOfProduct_Product" FromRole="MaterialOfProduct" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Articul" />
+          </Key>
+          <Property Name="Articul" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDType" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountInStock" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdGender" Type="Int32" Nullable="false" />
+          <Property Name="Age" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CostWithoutNDS" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK_Product_Gender" FromRole="Product" ToRole="Gender" />
+          <NavigationProperty Name="MaterialOfProduct" Relationship="Self.FK_MaterialOfProduct_Product" FromRole="Product" ToRole="MaterialOfProduct" />
+          <NavigationProperty Name="TypeOfProduct" Relationship="Self.FK_Product_TypeOfProduct1" FromRole="Product" ToRole="TypeOfProduct" />
+          <NavigationProperty Name="ProductionContain" Relationship="Self.FK_ProductionContain_Product" FromRole="Product" ToRole="ProductionContain" />
+          <NavigationProperty Name="SuppliesProductsInProductStockContains" Relationship="Self.FK_SuppliesProductsInProductStockContains_Product1" FromRole="Product" ToRole="SuppliesProductsInProductStockContains" />
+          <NavigationProperty Name="SuppliesProductsInShopsContains" Relationship="Self.FK_SuppliesProductsInShopsContains_Product" FromRole="Product" ToRole="SuppliesProductsInShopsContains" />
+        </EntityType>
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="IDProduction" />
+          </Key>
+          <Property Name="IDDepartment" Type="Int32" Nullable="false" />
+          <Property Name="DateProduction" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CountOfWorkers" Type="Int32" Nullable="false" />
+          <Property Name="IDProduction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SendStatus" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Departaments" Relationship="Self.FK_Production_Departaments" FromRole="Production" ToRole="Departaments" />
+          <NavigationProperty Name="ProductionContain" Relationship="Self.FK_ProductionContain_Production" FromRole="Production" ToRole="ProductionContain" />
+        </EntityType>
+        <EntityType Name="ProductionContain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Articul" Type="Int32" Nullable="false" />
+          <Property Name="CountOfProduct" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDProduction" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductionContain_Product" FromRole="ProductionContain" ToRole="Product" />
+          <NavigationProperty Name="Production" Relationship="Self.FK_ProductionContain_Production" FromRole="ProductionContain" ToRole="Production" />
+        </EntityType>
+        <EntityType Name="Shops">
+          <Key>
+            <PropertyRef Name="IDShop" />
+          </Key>
+          <Property Name="IDShop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="SuppliesProductsInShops" Relationship="Self.FK_SuppliesProductsInShops_Shops" FromRole="Shops" ToRole="SuppliesProductsInShops" />
+        </EntityType>
+        <EntityType Name="SuppliesMaterialsInMaterialStock">
+          <Key>
+            <PropertyRef Name="IDSupply" />
+          </Key>
+          <Property Name="IDSupply" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SuppliesMaterialsInMaterialStockContains" Relationship="Self.FK_SuppliesMaterialsInMaterialStockContains_SuppliesMaterialsInMaterialStock" FromRole="SuppliesMaterialsInMaterialStock" ToRole="SuppliesMaterialsInMaterialStockContains" />
+        </EntityType>
+        <EntityType Name="SuppliesMaterialsInMaterialStockContains">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDSupply" Type="Int32" Nullable="false" />
+          <Property Name="IDMaterial" Type="Int32" Nullable="false" />
+          <Property Name="CountOfMaterial" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_SuppliesMaterialsInMaterialStockContains_Material" FromRole="SuppliesMaterialsInMaterialStockContains" ToRole="Material" />
+          <NavigationProperty Name="SuppliesMaterialsInMaterialStock" Relationship="Self.FK_SuppliesMaterialsInMaterialStockContains_SuppliesMaterialsInMaterialStock" FromRole="SuppliesMaterialsInMaterialStockContains" ToRole="SuppliesMaterialsInMaterialStock" />
+        </EntityType>
+        <EntityType Name="SuppliesProductsInProductStock">
+          <Key>
+            <PropertyRef Name="IDSupply" />
+          </Key>
+          <Property Name="IDSupply" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SuppliesProductsInProductStockContains" Relationship="Self.FK_SuppliesProductsInProductStockContains_SuppliesProductsInProductStock" FromRole="SuppliesProductsInProductStock" ToRole="SuppliesProductsInProductStockContains" />
+        </EntityType>
+        <EntityType Name="SuppliesProductsInProductStockContains">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDSupply" Type="Int32" Nullable="false" />
+          <Property Name="ShoeArticul" Type="Int32" Nullable="false" />
+          <Property Name="CountOfShoe" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_SuppliesProductsInProductStockContains_Product1" FromRole="SuppliesProductsInProductStockContains" ToRole="Product" />
+          <NavigationProperty Name="SuppliesProductsInProductStock" Relationship="Self.FK_SuppliesProductsInProductStockContains_SuppliesProductsInProductStock" FromRole="SuppliesProductsInProductStockContains" ToRole="SuppliesProductsInProductStock" />
+        </EntityType>
+        <EntityType Name="SuppliesProductsInShops">
+          <Key>
+            <PropertyRef Name="IDSupply" />
+          </Key>
+          <Property Name="IDSupply" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDShop" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_SuppliesProductsInShops_Shops" FromRole="SuppliesProductsInShops" ToRole="Shops" />
+          <NavigationProperty Name="SuppliesProductsInShopsContains" Relationship="Self.FK_SuppliesProductsInShopsContains_SuppliesProductsInShops" FromRole="SuppliesProductsInShops" ToRole="SuppliesProductsInShopsContains" />
+        </EntityType>
+        <EntityType Name="SuppliesProductsInShopsContains">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDSupply" Type="Int32" Nullable="false" />
+          <Property Name="ShoeArticul" Type="Int32" Nullable="false" />
+          <Property Name="CountOfShoe" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_SuppliesProductsInShopsContains_Product" FromRole="SuppliesProductsInShopsContains" ToRole="Product" />
+          <NavigationProperty Name="SuppliesProductsInShops" Relationship="Self.FK_SuppliesProductsInShopsContains_SuppliesProductsInShops" FromRole="SuppliesProductsInShopsContains" ToRole="SuppliesProductsInShops" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeOfProduct">
+          <Key>
+            <PropertyRef Name="IDType" />
+          </Key>
+          <Property Name="IDType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_TypeOfProduct1" FromRole="TypeOfProduct" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Employees_Departaments">
+          <End Role="Departaments" Type="Self.Departaments" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departaments">
+              <PropertyRef Name="IDDepartment" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="IDDepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_Departaments">
+          <End Role="Departaments" Type="Self.Departaments" Multiplicity="1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departaments">
+              <PropertyRef Name="IDDepartment" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="IDDepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="IdGender" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IdGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialOfProduct_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="MaterialOfProduct" Type="Self.MaterialOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="IDMaterial" />
+            </Principal>
+            <Dependent Role="MaterialOfProduct">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesMaterialsInMaterialStockContains_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesMaterialsInMaterialStockContains" Type="Self.SuppliesMaterialsInMaterialStockContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="IDMaterial" />
+            </Principal>
+            <Dependent Role="SuppliesMaterialsInMaterialStockContains">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialOfProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="MaterialOfProduct" Type="Self.MaterialOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Articul" />
+            </Principal>
+            <Dependent Role="MaterialOfProduct">
+              <PropertyRef Name="Articul" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_TypeOfProduct1">
+          <End Role="TypeOfProduct" Type="Self.TypeOfProduct" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfProduct">
+              <PropertyRef Name="IDType" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductionContain_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductionContain" Type="Self.ProductionContain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Articul" />
+            </Principal>
+            <Dependent Role="ProductionContain">
+              <PropertyRef Name="Articul" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesProductsInProductStockContains_Product1">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesProductsInProductStockContains" Type="Self.SuppliesProductsInProductStockContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Articul" />
+            </Principal>
+            <Dependent Role="SuppliesProductsInProductStockContains">
+              <PropertyRef Name="ShoeArticul" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesProductsInShopsContains_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesProductsInShopsContains" Type="Self.SuppliesProductsInShopsContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Articul" />
+            </Principal>
+            <Dependent Role="SuppliesProductsInShopsContains">
+              <PropertyRef Name="ShoeArticul" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductionContain_Production">
+          <End Role="Production" Type="Self.Production" Multiplicity="1" />
+          <End Role="ProductionContain" Type="Self.ProductionContain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Production">
+              <PropertyRef Name="IDProduction" />
+            </Principal>
+            <Dependent Role="ProductionContain">
+              <PropertyRef Name="IDProduction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesProductsInShops_Shops">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="1" />
+          <End Role="SuppliesProductsInShops" Type="Self.SuppliesProductsInShops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="IDShop" />
+            </Principal>
+            <Dependent Role="SuppliesProductsInShops">
+              <PropertyRef Name="IDShop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesMaterialsInMaterialStockContains_SuppliesMaterialsInMaterialStock">
+          <End Role="SuppliesMaterialsInMaterialStock" Type="Self.SuppliesMaterialsInMaterialStock" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesMaterialsInMaterialStockContains" Type="Self.SuppliesMaterialsInMaterialStockContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuppliesMaterialsInMaterialStock">
+              <PropertyRef Name="IDSupply" />
+            </Principal>
+            <Dependent Role="SuppliesMaterialsInMaterialStockContains">
+              <PropertyRef Name="IDSupply" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesProductsInProductStockContains_SuppliesProductsInProductStock">
+          <End Role="SuppliesProductsInProductStock" Type="Self.SuppliesProductsInProductStock" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesProductsInProductStockContains" Type="Self.SuppliesProductsInProductStockContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuppliesProductsInProductStock">
+              <PropertyRef Name="IDSupply" />
+            </Principal>
+            <Dependent Role="SuppliesProductsInProductStockContains">
+              <PropertyRef Name="IDSupply" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliesProductsInShopsContains_SuppliesProductsInShops">
+          <End Role="SuppliesProductsInShops" Type="Self.SuppliesProductsInShops" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SuppliesProductsInShopsContains" Type="Self.SuppliesProductsInShopsContains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuppliesProductsInShops">
+              <PropertyRef Name="IDSupply" />
+            </Principal>
+            <Dependent Role="SuppliesProductsInShopsContains">
+              <PropertyRef Name="IDSupply" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShoesKursovoiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departaments" EntityType="Self.Departaments" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" />
+          <EntitySet Name="Material" EntityType="Self.Material" />
+          <EntitySet Name="MaterialOfProduct" EntityType="Self.MaterialOfProduct" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Production" EntityType="Self.Production" />
+          <EntitySet Name="ProductionContain" EntityType="Self.ProductionContain" />
+          <EntitySet Name="Shops" EntityType="Self.Shops" />
+          <EntitySet Name="SuppliesMaterialsInMaterialStock" EntityType="Self.SuppliesMaterialsInMaterialStock" />
+          <EntitySet Name="SuppliesMaterialsInMaterialStockContains" EntityType="Self.SuppliesMaterialsInMaterialStockContains" />
+          <EntitySet Name="SuppliesProductsInProductStock" EntityType="Self.SuppliesProductsInProductStock" />
+          <EntitySet Name="SuppliesProductsInProductStockContains" EntityType="Self.SuppliesProductsInProductStockContains" />
+          <EntitySet Name="SuppliesProductsInShops" EntityType="Self.SuppliesProductsInShops" />
+          <EntitySet Name="SuppliesProductsInShopsContains" EntityType="Self.SuppliesProductsInShopsContains" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypeOfProduct" EntityType="Self.TypeOfProduct" />
+          <AssociationSet Name="FK_Employees_Departaments" Association="Self.FK_Employees_Departaments">
+            <End Role="Departaments" EntitySet="Departaments" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_Departaments" Association="Self.FK_Production_Departaments">
+            <End Role="Departaments" EntitySet="Departaments" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Gender" Association="Self.FK_Product_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialOfProduct_Material" Association="Self.FK_MaterialOfProduct_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="MaterialOfProduct" EntitySet="MaterialOfProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesMaterialsInMaterialStockContains_Material" Association="Self.FK_SuppliesMaterialsInMaterialStockContains_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="SuppliesMaterialsInMaterialStockContains" EntitySet="SuppliesMaterialsInMaterialStockContains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialOfProduct_Product" Association="Self.FK_MaterialOfProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="MaterialOfProduct" EntitySet="MaterialOfProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_TypeOfProduct1" Association="Self.FK_Product_TypeOfProduct1">
+            <End Role="TypeOfProduct" EntitySet="TypeOfProduct" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductionContain_Product" Association="Self.FK_ProductionContain_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductionContain" EntitySet="ProductionContain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesProductsInProductStockContains_Product1" Association="Self.FK_SuppliesProductsInProductStockContains_Product1">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="SuppliesProductsInProductStockContains" EntitySet="SuppliesProductsInProductStockContains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesProductsInShopsContains_Product" Association="Self.FK_SuppliesProductsInShopsContains_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="SuppliesProductsInShopsContains" EntitySet="SuppliesProductsInShopsContains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductionContain_Production" Association="Self.FK_ProductionContain_Production">
+            <End Role="Production" EntitySet="Production" />
+            <End Role="ProductionContain" EntitySet="ProductionContain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesProductsInShops_Shops" Association="Self.FK_SuppliesProductsInShops_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="SuppliesProductsInShops" EntitySet="SuppliesProductsInShops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesMaterialsInMaterialStockContains_SuppliesMaterialsInMaterialStock" Association="Self.FK_SuppliesMaterialsInMaterialStockContains_SuppliesMaterialsInMaterialStock">
+            <End Role="SuppliesMaterialsInMaterialStock" EntitySet="SuppliesMaterialsInMaterialStock" />
+            <End Role="SuppliesMaterialsInMaterialStockContains" EntitySet="SuppliesMaterialsInMaterialStockContains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesProductsInProductStockContains_SuppliesProductsInProductStock" Association="Self.FK_SuppliesProductsInProductStockContains_SuppliesProductsInProductStock">
+            <End Role="SuppliesProductsInProductStock" EntitySet="SuppliesProductsInProductStock" />
+            <End Role="SuppliesProductsInProductStockContains" EntitySet="SuppliesProductsInProductStockContains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliesProductsInShopsContains_SuppliesProductsInShops" Association="Self.FK_SuppliesProductsInShopsContains_SuppliesProductsInShops">
+            <End Role="SuppliesProductsInShops" EntitySet="SuppliesProductsInShops" />
+            <End Role="SuppliesProductsInShopsContains" EntitySet="SuppliesProductsInShopsContains" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ShoesKursovoiModelContainer" CdmEntityContainer="ShoesKursovoiEntities">
+          <EntitySetMapping Name="Departaments">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.Departaments">
+              <MappingFragment StoreEntitySet="Departaments">
+                <ScalarProperty Name="IDDepartment" ColumnName="IDDepartment" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="IDEmpoyee" ColumnName="IDEmpoyee" />
+                <ScalarProperty Name="IDDepartment" ColumnName="IDDepartment" />
+                <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="IdGender" ColumnName="IdGender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Material">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="IDMaterial" ColumnName="IDMaterial" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountInStock" ColumnName="CountInStock" />
+                <ScalarProperty Name="CostWithoutNDS" ColumnName="CostWithoutNDS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialOfProduct">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.MaterialOfProduct">
+              <MappingFragment StoreEntitySet="MaterialOfProduct">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Articul" ColumnName="Articul" />
+                <ScalarProperty Name="IDMaterial" ColumnName="IDMaterial" />
+                <ScalarProperty Name="CountOfMaterial" ColumnName="CountOfMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Articul" ColumnName="Articul" />
+                <ScalarProperty Name="IDType" ColumnName="IDType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountInStock" ColumnName="CountInStock" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="IdGender" ColumnName="IdGender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="CostWithoutNDS" ColumnName="CostWithoutNDS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Production">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.Production">
+              <MappingFragment StoreEntitySet="Production">
+                <ScalarProperty Name="IDDepartment" ColumnName="IDDepartment" />
+                <ScalarProperty Name="DateProduction" ColumnName="DateProduction" />
+                <ScalarProperty Name="CountOfWorkers" ColumnName="CountOfWorkers" />
+                <ScalarProperty Name="IDProduction" ColumnName="IDProduction" />
+                <ScalarProperty Name="SendStatus" ColumnName="SendStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductionContain">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.ProductionContain">
+              <MappingFragment StoreEntitySet="ProductionContain">
+                <ScalarProperty Name="Articul" ColumnName="Articul" />
+                <ScalarProperty Name="CountOfProduct" ColumnName="CountOfProduct" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDProduction" ColumnName="IDProduction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shops">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.Shops">
+              <MappingFragment StoreEntitySet="Shops">
+                <ScalarProperty Name="IDShop" ColumnName="IDShop" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuppliesMaterialsInMaterialStock">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.SuppliesMaterialsInMaterialStock">
+              <MappingFragment StoreEntitySet="SuppliesMaterialsInMaterialStock">
+                <ScalarProperty Name="IDSupply" ColumnName="IDSupply" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuppliesMaterialsInMaterialStockContains">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.SuppliesMaterialsInMaterialStockContains">
+              <MappingFragment StoreEntitySet="SuppliesMaterialsInMaterialStockContains">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDSupply" ColumnName="IDSupply" />
+                <ScalarProperty Name="IDMaterial" ColumnName="IDMaterial" />
+                <ScalarProperty Name="CountOfMaterial" ColumnName="CountOfMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuppliesProductsInProductStock">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.SuppliesProductsInProductStock">
+              <MappingFragment StoreEntitySet="SuppliesProductsInProductStock">
+                <ScalarProperty Name="IDSupply" ColumnName="IDSupply" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuppliesProductsInProductStockContains">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.SuppliesProductsInProductStockContains">
+              <MappingFragment StoreEntitySet="SuppliesProductsInProductStockContains">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDSupply" ColumnName="IDSupply" />
+                <ScalarProperty Name="ShoeArticul" ColumnName="ShoeArticul" />
+                <ScalarProperty Name="CountOfShoe" ColumnName="CountOfShoe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuppliesProductsInShops">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.SuppliesProductsInShops">
+              <MappingFragment StoreEntitySet="SuppliesProductsInShops">
+                <ScalarProperty Name="IDSupply" ColumnName="IDSupply" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IDShop" ColumnName="IDShop" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuppliesProductsInShopsContains">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.SuppliesProductsInShopsContains">
+              <MappingFragment StoreEntitySet="SuppliesProductsInShopsContains">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDSupply" ColumnName="IDSupply" />
+                <ScalarProperty Name="ShoeArticul" ColumnName="ShoeArticul" />
+                <ScalarProperty Name="CountOfShoe" ColumnName="CountOfShoe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfProduct">
+            <EntityTypeMapping TypeName="ShoesKursovoiModel.TypeOfProduct">
+              <MappingFragment StoreEntitySet="TypeOfProduct">
+                <ScalarProperty Name="IDType" ColumnName="IDType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,28 @@
+﻿<Window x:Class="RickVowens.EditWindows.WindowEditMaterial"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RickVowens.EditWindows"
+        mc:Ignorable="d"
+        Title="Отредактировать материал" Icon="D:\3 курс\RickVowens\imgs\icon.png" MinHeight="270" MinWidth="480" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel Width="305" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Margin="0, 10">Название:</TextBlock>
+            <ComboBox Name="cbNamesMaterials" SelectedValue="{Binding IDMaterial}" SelectedValuePath="IDMaterial" DisplayMemberPath="Name">
+            </ComboBox>
+            <TextBlock Margin="0, 10">Количество используемого материала в производстве:</TextBlock>
+            <TextBox Text="{Binding CountOfMaterial}"></TextBox>
+            <Button Width="120" Height="35" Margin="0, 10" Click="btAddNewMaterial" Background="Black" Foreground="White">
+                <Button.Content>
+                    <TextBlock FontFamily="../Fonts/#Ledger" FontSize="11">Добавить материал</TextBlock>
+                </Button.Content>
+            </Button>
+            <Button Width="120" Height="35" Margin="0, 10" Click="btSave" Background="Black" Foreground="White">
+                <Button.Content>
+                    <TextBlock FontFamily="../Fonts/#Ledger" FontSize="15">Подтвердить</TextBlock>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

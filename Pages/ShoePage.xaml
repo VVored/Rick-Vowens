@@ -1,0 +1,130 @@
+﻿<Page x:Class="RickVowens.Pages.ShoePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RickVowens.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ShoePage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="131*"/>
+            <RowDefinition Height="318*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.RowSpan="2">
+            <StackPanel>
+                <Viewbox Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="../imgs/image 1.png" Stretch="UniformToFill"></ImageBrush>
+                        </StackPanel.Background>
+                        <Button Width="120" Margin="50, 20" Height="35" Click="btAddClick" Background="Black" Foreground="White">
+                            <Button.Content>
+                                <TextBlock FontFamily="../Fonts/#Ledger" FontSize="15">Добавить</TextBlock>
+                            </Button.Content>
+                        </Button>
+                        <Button Width="120" Margin="50,0" Height="35" Click="btImport" Background="Black" Foreground="White">
+                            <Button.Content>
+                                <TextBlock FontFamily="../Fonts/#Ledger" FontSize="15">Импорт</TextBlock>
+                            </Button.Content>
+                        </Button>
+                        <Button Width="120" Margin="50,0" Height="35" Click="btExport" Background="Black" Foreground="White">
+                            <Button.Content>
+                                <TextBlock FontFamily="../Fonts/#Ledger" FontSize="15">Экспорт</TextBlock>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                </Viewbox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200*"/>
+                        <ColumnDefinition Width="583*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="20,0,20,0" Grid.Column="0">
+                        <TextBlock Text="Поиск" FontSize="30" FontFamily="../Fonts/#Ledger"></TextBlock>
+                        <TextBox FontSize="20" Name="tbSearch" TextChanged="tbSearch_TextChanged" FontFamily="../Fonts/#Ledger"></TextBox>
+                        <TextBlock Text="Пол" FontSize="30" FontFamily="../Fonts/#Ledger"></TextBlock>
+                        <CheckBox Name="male" Margin="10, 0, 0, 0" Width="100" HorizontalAlignment="Left">
+                            <TextBlock FontFamily="../Fonts/#Ledger">Мужской</TextBlock>
+                        </CheckBox>
+                        <CheckBox Name="female" Margin="10, 0, 0, 0"  Width="100" HorizontalAlignment="Left">
+                            <TextBlock FontFamily="../Fonts/#Ledger">Женский</TextBlock>
+                        </CheckBox>
+                        <CheckBox Name="unisex" Margin="10, 0, 0, 0"  Width="100" HorizontalAlignment="Left">
+                            <TextBlock FontFamily="../Fonts/#Ledger">Унисекс</TextBlock>
+                        </CheckBox>
+                        <TextBlock Text="Возраст" FontSize="30" FontFamily="../Fonts/#Ledger"></TextBlock>
+                        <CheckBox Name="old" Margin="10, 0, 0, 0" Width="100" HorizontalAlignment="Left">
+                            <TextBlock FontFamily="../Fonts/#Ledger">Взрослое</TextBlock>
+
+                        </CheckBox>
+                        <CheckBox Name="child" Margin="10, 0, 0, 0"  Width="100" HorizontalAlignment="Left">
+                            <TextBlock FontFamily="../Fonts/#Ledger">Детское</TextBlock>
+                        </CheckBox>
+                        <Button Click="btSort" Margin="0, 10" Background="Black" Foreground="White">
+                            <Button.Content>
+                                <TextBlock FontFamily="../Fonts/#Ledger" FontSize="18">Применить</TextBlock>
+                            </Button.Content>
+                        </Button>
+                        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                            <Button FontWeight="SemiBold" BorderBrush="Transparent" Background="Transparent" Foreground="Black" Click="GoToFirstPage" Content="&lt;&lt;"></Button>
+                            <Button FontWeight="SemiBold" BorderBrush="Transparent" Background="Transparent" Foreground="Black" Click="GoToPreviousPage" Content="&lt;"></Button>
+                            <TextBox Margin="10, 0" Name="TxtCurrentPage" Height="30" Width="50"></TextBox>
+                            <TextBlock Name="LblTotalPages" Height="30">of N</TextBlock>
+                            <Button FontWeight="SemiBold" BorderBrush="Transparent" Background="Transparent" Margin="10, 0, 0, 0"  Foreground="Black" Click="GoToNextPage" Content="&gt;"></Button>
+                            <Button FontWeight="SemiBold" BorderBrush="Transparent" Background="Transparent" Foreground="Black" Click="GoToLastPage" Content="&gt;&gt;"></Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <ListView Name="lvShoes" BorderBrush="Transparent" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Column="1">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Margin="50, 0, 0, 0" HorizontalAlignment="Left" IsItemsHost="True" Orientation="Horizontal"></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <DataTemplate.Triggers>
+                                    <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:5" To="0.0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="idShoe"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </DataTemplate.Triggers>
+                                <Border BorderBrush="Black" BorderThickness="1" Name="idShoe">
+                                    <StackPanel Width="230" Orientation="Vertical">
+                                        <Image Height="200" Width="200" Source="{Binding ImagePath}" Margin="10"></Image>
+                                        <StackPanel>
+                                            <TextBlock HorizontalAlignment="Center" Margin="10" FontFamily="../Fonts/#Ledger" Text="{Binding Name}"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Center" Margin="5" Text="{Binding CountInStock}"></TextBlock>
+                                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <Button Width="90" Margin="10" Click="btDelete" Height="35" Background="Black" Foreground="White">
+                                                    <Button.Content>
+                                                        <TextBlock FontFamily="../Fonts/#Ledger" FontSize="11">Удалить</TextBlock>
+                                                    </Button.Content>
+                                                </Button>
+                                                <Button Click="btEditShoe" Width="90" Height="35" Margin="10" Background="Black" Foreground="White">
+                                                    <Button.Content>
+                                                        <TextBlock FontFamily="../Fonts/#Ledger" FontSize="11">Редактировать</TextBlock>
+                                                    </Button.Content>
+                                                </Button>
+                                                <Button Click="btClickMaterialsInShoe" Width="90" Height="35" Margin="10" Background="Black" Foreground="White">
+                                                    <Button.Content>
+                                                        <TextBlock FontFamily="../Fonts/#Ledger" FontSize="11">Материалы</TextBlock>
+                                                    </Button.Content>
+                                                </Button>
+                                            </WrapPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

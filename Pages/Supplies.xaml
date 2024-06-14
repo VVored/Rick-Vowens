@@ -1,0 +1,110 @@
+﻿<Page x:Class="RickVowens.Pages.Supplies"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RickVowens.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Supplies">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.8*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Viewbox>
+            <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">
+                <TextBlock Text="Вид поставки/отгрузки" FontSize="16" FontFamily="../Fonts/#Ledger"></TextBlock>
+                <RadioButton Name="rbProductInProductStock" Margin="10, 0, 0, 0" HorizontalAlignment="Left">
+                    <TextBlock FontFamily="../Fonts/#Ledger">Товар на склад</TextBlock>
+                </RadioButton>
+                <RadioButton Name="rbProductInShops" Margin="10, 0, 0, 0" HorizontalAlignment="Left">
+                    <TextBlock FontFamily="../Fonts/#Ledger">Товар в магазин</TextBlock>
+                </RadioButton>
+                <RadioButton Name="rbMaterialInMaterialStock" Margin="10, 0, 0, 0" HorizontalAlignment="Left">
+                    <TextBlock FontFamily="../Fonts/#Ledger">Материалы на склад</TextBlock>
+                </RadioButton>
+                <TextBlock Text="Дата отправки" FontSize="16" FontFamily="../Fonts/#Ledger"></TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock FontFamily="../Fonts/#Ledger">от:</TextBlock>
+                    <DatePicker Name="tbDateFrom" FontFamily="../Fonts/#Ledger" Margin="10" HorizontalAlignment="Left" Width="75"></DatePicker>
+                    <TextBlock FontFamily="../Fonts/#Ledger">до:</TextBlock>
+                    <DatePicker Name="tbDateTo" FontFamily="../Fonts/#Ledger" HorizontalAlignment="Right" Margin="10" Width="75"></DatePicker>
+                </StackPanel>
+                <Button Width="180" Click="btChooseTableAndDate" Background="Black" Foreground="White">
+                    <Button.Content>
+                        <TextBlock FontFamily="../Fonts/#Ledger" FontSize="12">Применить</TextBlock>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Viewbox>
+        <ListView Grid.Column="0" Grid.Row="1" Name="lvShoes" BorderBrush="Transparent" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Viewbox>
+                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center">
+                            <StackPanel Width="229" Orientation="Vertical">
+                                <Image Height="120" Width="100" Source="{Binding Product.ImagePath}" Margin="10"></Image>
+                                <StackPanel>
+                                    <TextBlock HorizontalAlignment="Center" Margin="10" FontSize="11" FontFamily="../Fonts/#Ledger" Text="{Binding Product.Name}"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Center" Margin="5" Text="{Binding CountOfShoe}" FontSize="22"></TextBlock>
+                                    <Button Width="90" Margin="10" Click="btDelete" Height="35" Background="Black" Foreground="White">
+                                        <Button.Content>
+                                            <TextBlock FontFamily="../Fonts/#Ledger" FontSize="18">Удалить</TextBlock>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Viewbox>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView Grid.Column="0" Grid.Row="1" Name="lvMaterial" Visibility="Collapsed" BorderBrush="Transparent" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Viewbox>
+                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center">
+                            <StackPanel Width="229" Orientation="Vertical">
+                                <StackPanel>
+                                    <TextBlock HorizontalAlignment="Center" Margin="10" FontSize="11" FontFamily="../Fonts/#Ledger" Text="{Binding Material.Name}"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Center" Margin="5" Text="{Binding CountOfMaterial}" FontSize="22"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Center" Margin="5" Text="{Binding Material.CostWithNDS}" FontSize="22"></TextBlock>
+                                    <Button Width="90" Margin="10" Click="btDelete" Height="35" Background="Black" Foreground="White">
+                                        <Button.Content>
+                                            <TextBlock FontFamily="../Fonts/#Ledger" FontSize="18">Удалить</TextBlock>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Viewbox>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Viewbox Grid.Row="2" Grid.Column="0">
+            <Button Padding="20, 0" Margin="20, 0" Name="btAddContain" Visibility="Collapsed" Grid.Row="2" Grid.Column="0" Click="btAddContainClick" BorderBrush="Transparent" Background="Transparent" Foreground="Black">
+                <Button.Content>
+                    <TextBlock Text="+" FontFamily="../Fonts/#Ledger" FontSize="8"></TextBlock>
+                </Button.Content>
+            </Button>
+        </Viewbox>
+        <Frame Name="frame" Grid.RowSpan="3" Grid.Column="1"/>
+    </Grid>
+</Page>

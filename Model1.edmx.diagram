@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="df0a23302e2c428b96134b0ac79e4385" Name="Diagram1">
+        <EntityTypeShape EntityType="ShoesKursovoiModel.Departaments" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.Employees" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.Gender" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.Material" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.MaterialOfProduct" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.Product" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.Production" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.ProductionContain" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.Shops" Width="1.5" PointX="3.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.SuppliesMaterialsInMaterialStock" Width="1.5" PointX="6" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.SuppliesMaterialsInMaterialStockContains" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.SuppliesProductsInProductStock" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.SuppliesProductsInProductStockContains" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.SuppliesProductsInShops" Width="1.5" PointX="6" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.SuppliesProductsInShopsContains" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoesKursovoiModel.TypeOfProduct" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_Employees_Departaments" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_Production_Departaments" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_Product_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_MaterialOfProduct_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_SuppliesMaterialsInMaterialStockContains_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_MaterialOfProduct_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_Product_TypeOfProduct1" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_ProductionContain_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_SuppliesProductsInProductStockContains_Product1" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_SuppliesProductsInShopsContains_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_ProductionContain_Production" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_SuppliesProductsInShops_Shops" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_SuppliesMaterialsInMaterialStockContains_SuppliesMaterialsInMaterialStock" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_SuppliesProductsInProductStockContains_SuppliesProductsInProductStock" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoesKursovoiModel.FK_SuppliesProductsInShopsContains_SuppliesProductsInShops" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

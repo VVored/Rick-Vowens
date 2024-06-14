@@ -1,0 +1,51 @@
+﻿<Page x:Class="RickVowens.Pages.PageStat"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RickVowens.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageStat">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Background="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+            <Border BorderBrush="Black" BorderThickness="1" Padding="10" CornerRadius="10" Margin="10">
+                <StackPanel>
+                    <Button Margin="0, 20, 0, 20" Name="btShoeStat" Click="btShoeStatClick" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent">
+                        <Button.Content>
+                            <TextBlock VerticalAlignment="Center" FontFamily="../Fonts/#Ledger" FontSize="21">Обувь</TextBlock>
+                        </Button.Content>
+                    </Button>
+                    <Button BorderBrush="Transparent" Name="btSupplies" Click="clickBtSupplies" HorizontalAlignment="Left" Background="Transparent" Margin="0, 0, 0, 20">
+                        <Button.Content>
+                            <TextBlock VerticalAlignment="Center" FontFamily="../Fonts/#Ledger" FontSize="21">Поставки</TextBlock>
+                        </Button.Content>
+                    </Button>
+                    <Button Name="btProduction" Click="btProductionStatClick" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent" Margin="0, 0, 0, 20">
+                        <Button.Content>
+                            <TextBlock VerticalAlignment="Center" FontFamily="../Fonts/#Ledger" FontSize="21">Производство</TextBlock>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Background="Transparent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+            <Border BorderBrush="Black" BorderThickness="1" Padding="10" CornerRadius="10" Margin="10">
+                <StackPanel>
+                    <TextBlock FontFamily="../Fonts/#Ledger" FontSize="21" TextWrapping="Wrap">Журнал регистраций</TextBlock>
+                    <ListBox Name="lbLogs" Margin="10" MaxHeight="110"></ListBox>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <Frame Grid.Column="1" Name="frame" Margin="0.2,0,0,-0.4" Grid.RowSpan="2"></Frame>
+    </Grid>
+</Page>
