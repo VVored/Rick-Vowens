@@ -1,20 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Runtime.Caching;
 using System.Xml;
-using System.Threading;
 
 namespace RickVowens.Pages
 {
@@ -139,20 +128,21 @@ namespace RickVowens.Pages
             if (DataBank.currentUser.Post == "администратор")
             {
                 _currentPage = 1;
-                var button = sender as Button;
-                var shoe = button.DataContext as Product;
-                var cache = MemoryCache.Default;
-
-                if (shoe != null)
+                List<Product> selectedProducts = new List<Product>();
+                if (lvShoes.SelectedItems.Count >= 1)
                 {
-                    cache.Add(shoe.MemoryCacheKey, shoe, DateTimeOffset.Now.AddMinutes(2));
-                    MessageBoxResult result = MessageBox.Show("Вы действительно хотите удалить запись?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                    foreach (Product i in lvShoes.SelectedItems)
+                    {
+                        selectedProducts.Add(i);
+                    }
+                    MessageBoxResult result = MessageBox.Show("Вы действительно хотите удалить выбранные записи?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Error);
                     if (result == MessageBoxResult.Yes)
                     {
-                        MainWindow.shoesKursovoiEntities.Product.Remove(shoe);
+                        foreach(Product i in selectedProducts)
+                        {
+                            MainWindow.shoesKursovoiEntities.Product.Remove(i);
+                        }
                         MainWindow.shoesKursovoiEntities.SaveChanges();
-                        var data = cache.Get(shoe.MemoryCacheKey) as Product;
-                        MessageBox.Show(data.Name);
                     }
                 }
                 SortListOfShoe();
@@ -280,31 +270,31 @@ namespace RickVowens.Pages
                             Product newProduct = new Product();
                             if (reader.NodeType == XmlNodeType.Element && reader.Name == "idtype")
                             {
-                                newProduct.IDType = int.Parse(reader.ReadElementContentAsString()); 
+                                newProduct.IDType = int.Parse(reader.ReadElementContentAsString());
                             }
                             if (reader.NodeType == XmlNodeType.Element && reader.Name == "name")
                             {
-                                newProduct.Name = reader.ReadElementContentAsString(); 
+                                newProduct.Name = reader.ReadElementContentAsString();
                             }
                             if (reader.NodeType == XmlNodeType.Element && reader.Name == "countinstock")
                             {
-                                newProduct.CountInStock = int.Parse(reader.ReadElementContentAsString()); 
+                                newProduct.CountInStock = int.Parse(reader.ReadElementContentAsString());
                             }
                             if (reader.NodeType == XmlNodeType.Element && reader.Name == "image")
                             {
-                                newProduct.Image = reader.ReadElementContentAsString(); 
+                                newProduct.Image = reader.ReadElementContentAsString();
                             }
                             if (reader.NodeType == XmlNodeType.Element && reader.Name == "idgender")
                             {
-                                newProduct.IdGender = int.Parse(reader.ReadElementContentAsString()); 
+                                newProduct.IdGender = int.Parse(reader.ReadElementContentAsString());
                             }
                             if (reader.NodeType == XmlNodeType.Element && reader.Name == "age")
                             {
-                                newProduct.Age = reader.ReadElementContentAsString(); 
+                                newProduct.Age = reader.ReadElementContentAsString();
                             }
                             if (reader.NodeType == XmlNodeType.Element && reader.Name == "costwithoutnds")
                             {
-                                newProduct.CostWithoutNDS = decimal.Parse(reader.ReadElementContentAsString()); 
+                                newProduct.CostWithoutNDS = decimal.Parse(reader.ReadElementContentAsString());
                             }
                             if (newProduct.CostWithoutNDS != 0)
                             {
@@ -313,6 +303,7 @@ namespace RickVowens.Pages
                         }
                     }
                     MainWindow.shoesKursovoiEntities.SaveChanges();
+                    SortListOfShoe();
                     Refresh();
                 }
             }
@@ -331,7 +322,7 @@ namespace RickVowens.Pages
                 {
                     selectedProducts.Add(i);
                 }
-                using (XmlWriter writer = XmlWriter.Create("../../xmlExport/output.xml"))
+                using (XmlWriter writer = XmlWriter.Create($"../../xmlExport/output_{DateTime.Now.Day}_{DateTime.Now.Month}_{DateTime.Now.Year}_{DateTime.Now.Hour}_{DateTime.Now.Minute}_{DateTime.Now.Second}.xml"))
                 {
                     writer.WriteStartDocument();
                     writer.WriteStartElement("products");
@@ -350,7 +341,7 @@ namespace RickVowens.Pages
 
                         writer.WriteEndElement();
                     }
-                    
+
                     writer.WriteEndElement();
                     writer.WriteEndDocument();
                 }
@@ -359,7 +350,7 @@ namespace RickVowens.Pages
             {
                 MessageBox.Show("Вы не выбрали элементы для экспорта.");
             }
-            
+
         }
     }
 }
